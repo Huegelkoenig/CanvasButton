@@ -1,12 +1,12 @@
 'use strict'
-var canvas =document.getElementById("canvas");
+var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var rect=canvas.getBoundingClientRect();
 
 var CButtons=[];
-CButtons[0] = new CanvasButton(30,70,100,40,'test','white',true);
-CButtons[1] = new CanvasButton(120,150,100,40,'test','white',true);
-CButtons[2] = new CanvasButton(400,300,100,40,'test','white',true);
+CButtons[0] = new CanvasButton(canvas,30,70,100,40,'test','white',true);
+CButtons[1] = new CanvasButton(canvas,120,150,100,40,'test','white',true);
+CButtons[2] = new CanvasButton(canvas,400,300,100,40,'test','white',true);
 
 for (let i=0; i<CButtons.length; i++){
   let ButtonName = 'B'+ (i+1);

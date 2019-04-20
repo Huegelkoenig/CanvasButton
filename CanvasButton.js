@@ -1,6 +1,9 @@
 'use strict'
 class CanvasButton{
-  constructor(x,y,width,height,text,color,clickable){
+  constructor(canvas,x,y,width,height,text,color,clickable){
+    this.canvas = canvas;
+    this.ctx = this.canvas.getContext('2d');
+    this.rect = this.canvas.getBoundingClientRect();
     this.x=x;
     this.y=y;
     this.width=width;
@@ -28,35 +31,35 @@ class CanvasButton{
   }
 
   clicker(evt) {
-    if (evt.pageX-rect.left>=this.x && evt.pageX-rect.left<=this.x+this.width && evt.pageY-rect.top>=this.y && evt.pageY-rect.top<=this.y+this.height){
+    if (evt.pageX-this.rect.left>=this.x && evt.pageX-this.rect.left<=this.x+this.width && evt.pageY-this.rect.top>=this.y && evt.pageY-this.rect.top<=this.y+this.height){
       this.color='rgb('+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+','+Math.floor(Math.random()*256)+')';
     }
   }
 
 
   yes(){
-    ctx.strokeStyle = 'black'
-    ctx.lineWidth = 1;
+    this.ctx.strokeStyle = 'black'
+    this.ctx.lineWidth = 1;
   }
   no(){
-    ctx.strokeStyle = 'red'
-    ctx.lineWidth = 3;
+    this.ctx.strokeStyle = 'red'
+    this.ctx.lineWidth = 3;
   }
   draw(){
-    ctx.fillStyle = this.color;
-    ctx.fillRect(this.x, this.y, this.width, this.height);
-    ctx.fillStyle = 'black';
-    ctx.font = "30px Verdana";
-    ctx.fillText(this.text, this.x, this.y + this.height);
+    this.ctx.fillStyle = this.color;
+    this.ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.ctx.fillStyle = 'black';
+    this.ctx.font = "30px Verdana";
+    this.ctx.fillText(this.text, this.x, this.y + this.height);
 
     this.clickable ? this.yes() : this.no();
     
-    ctx.beginPath();
-    ctx.moveTo(this.x, this.y);
-    ctx.lineTo(this.x+this.width, this.y);
-    ctx.lineTo(this.x+this.width, this.y+this.height);
-    ctx.lineTo(this.x, this.y+this.height);
-    ctx.lineTo(this.x, this.y);
-    ctx.stroke();
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.x, this.y);
+    this.ctx.lineTo(this.x+this.width, this.y);
+    this.ctx.lineTo(this.x+this.width, this.y+this.height);
+    this.ctx.lineTo(this.x, this.y+this.height);
+    this.ctx.lineTo(this.x, this.y);
+    this.ctx.stroke();
   }
 }
